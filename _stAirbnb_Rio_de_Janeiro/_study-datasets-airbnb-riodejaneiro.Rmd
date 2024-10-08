@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Packages
+
+```{r}
+library(readr)
+library(dplyr)
+library(data.table)
+library(tidyverse)
+```
+
+## Import dataset
+
+```{r}
+dat <- read.csv("listings.csv", header = TRUE)
+head(dat)
+```
+
+## Transform in Data Table
+
+```{r}
+db_dat <- copy(dat)
+db_dat <- setDT(db_dat)
+head(db_dat)
+```
+
+# Difference about data fram and data table
+
+```{r}
+dat |> select(id, host_id, host_name, host_since)
+```
+
+```{r}
+db_dat[, .(id, host_id, host_name, host_since)]
+```
+
+## Create Table to Analysis
